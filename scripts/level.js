@@ -1,12 +1,17 @@
-// console.log("im level ");
-
 // get the json level data
-
 const allLevelDAta = () => {
   const url = "https://openapi.programming-hero.com/api/levels/all";
   fetch(url)
     .then((res) => res.json())
     .then((json) => displayLevelDAta(json.data));
+};
+
+//function to remove active class
+const removeActiveClass = () => {
+  const allActiveClass = document.querySelectorAll(".active");
+  allActiveClass.forEach((e) => {
+    e.classList.remove("active");
+  });
 };
 
 //display words
@@ -16,8 +21,15 @@ const wordsDisplay = (id) => {
   //   console.log(url);
   fetch(url)
     .then((res) => res.json())
-    .then((json) => displayWords(json.data));
+    .then((json) => {
+      const clickedBtnId = document.getElementById(`lvl-btn-${id}`);
+      removeActiveClass();
+      clickedBtnId.classList.add("active");
+      //   console.log(clickedBtnId)
+      displayWords(json.data);
+    });
 };
+
 // ekhn page e dynamically display koira dimu data etar jnnw ekta function lekhi
 const displayWords = (value) => {
   //   console.log(value);
@@ -79,7 +91,7 @@ const displayLevelDAta = (lessonDatas) => {
     //insewrting values
     lvlNumber.innerHTML = ` 
                 
-                <button onclick="wordsDisplay(${lesson.level_no})"  class="btn btn-outline btn-primary" >
+                <button id="lvl-btn-${lesson.level_no}" onclick="wordsDisplay(${lesson.level_no})"  class="btn btn-outline btn-primary" >
                 <i class="fa-solid fa-book-open"></i>lesson- ${lesson.level_no}
                 </button>
     
