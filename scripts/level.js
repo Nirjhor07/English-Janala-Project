@@ -23,18 +23,19 @@ const displayWords = (value) => {
   //   console.log(value);
   // bap re doira niya shi jekhane elemet or card store korbo
   const wordsDisplayContainer = document.getElementById("word-display");
-  wordsDisplay.innerHTML = "";
+  //    console.log("Before clear:", wordsDisplayContainer.innerHTML); // Check what's there initially
+  wordsDisplayContainer.innerHTML = "";
   value.forEach((element) => {
     // console.log(element);
     //create a div where we will store json card value
     const newDiv = document.createElement("div");
-    // adding class 
+    // adding class
     // newDiv.className = "bg-white py-10 px-9 text-center space-y-2"
     //set value to new child
     newDiv.innerHTML = `
      <div class="bg-white py-10 px-9 text-center space-y-2">
-      <h1 class="font-bold text-2xl">${element.word}</h1>
-      <p class="font-bangla">Meaning /Pronounciation</p>
+      <h1 class="font-bold text-2xl"> ${element.word} </h1>
+      <p class="font-bangla"> Meaning /Pronounciation </p>
       <P>${element.meaning} / ${element.pronunciation}  </P>
       </div>
     `;
