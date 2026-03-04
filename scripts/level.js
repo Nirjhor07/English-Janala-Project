@@ -29,6 +29,67 @@ const wordsDisplay = (id) => {
       displayWords(json.data);
     });
 };
+// {
+// "status": true,
+// "message": "successfully fetched a word details",
+// "data": {
+// "word": "Eager",
+// "meaning": "আগ্রহী",
+// "pronunciation": "ইগার",
+// "level": 1,
+// "sentence": "The kids were eager to open their gifts.",
+// "points": 1,
+// "partsOfSpeech": "adjective",
+// "synonyms": [
+// "enthusiastic",
+// "excited",
+// "keen"
+// ],
+// "id": 5
+// }
+// }
+
+//adding load modal function to display
+const loadModal = async (id) => {
+  const ModalUrlDetails = `https://openapi.programming-hero.com/api/word/${id}`;
+  const response = await fetch(ModalUrlDetails); //  Changed 'url' to 'response'
+  const data = await response.json(); //  Changed 'res' to 'data' and 'url' to 'response'
+  displayModal(data.data); // Just log, don't assign
+  // Add modal display logic here
+};
+
+// now i will display the object in modal
+const displayModal = (modalDatas) => {
+  console.log(modalDatas);
+  const modalDetails = document.getElementById("modal-details-container");
+  modalDetails.innerHTML = ` 
+  <div class="space-y-4">
+      <div>
+        <h1 class="text-2xl font-bold">
+          ${modalDatas.word} (<span><i class="fa-solid fa-microphone-lines"></i></span>:${modalDatas.pronunciation})
+        </h1>
+        <p>Meaning</p>
+        <p>${modalDatas.meaning}</p>
+      </div>
+
+      <div>
+        <h1 class="text-xl font-bold">Example</h1>
+        <p>${modalDatas.sentence}</p>
+      </div>
+
+      <div>
+        <h1 class="text-xl font-bold">সমার্থক শব্দ গুলো</h1>
+        <div class="space-x-1.5">
+          <button class="btn">${modalDatas.synonyms[0]}</button>
+          <button class="btn">${modalDatas.synonyms[1]}</button>
+          <button class="btn">${modalDatas.synonyms[2]}</button>
+        </div>
+      </div>
+    </div>
+
+`;
+  document.getElementById("my_modal_5").showModal();
+};
 
 // ekhn page e dynamically display koira dimu data etar jnnw ekta function lekhi
 const displayWords = (value) => {
@@ -62,7 +123,7 @@ const displayWords = (value) => {
       <P>${element.meaning ? element.meaning : "মিনিং পাওয়া যায়নি"} / ${element.pronunciation ? element.pronunciation : "প্রোনাউন্সিয়েসন পাওয়া যায়নি।"}  </P>
         <div class="flex justify-between">
         <button class="bg-base-200 rounded-full">
-          <i class="fa-solid fa-circle-info"></i>
+          <i onclick="loadModal('${element.id}')" class="fa-solid fa-circle-info"></i>
         </button>
         <button class="bg-base-200 rounded-full">
          <i class="fa-solid fa-volume-high"></i>
