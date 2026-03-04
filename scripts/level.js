@@ -25,6 +25,17 @@ const displayWords = (value) => {
   const wordsDisplayContainer = document.getElementById("word-display");
   //    console.log("Before clear:", wordsDisplayContainer.innerHTML); // Check what's there initially
   wordsDisplayContainer.innerHTML = "";
+  if (value.length == 0) {
+    wordsDisplayContainer.innerHTML = `
+       <div class="text-center col-span-full space-y-3.5 p-7">
+        <img class="mx-auto" src="./assets/alert-error.png" alt=""> 
+        <p class="text-gray-400 ">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
+        <h1 class="font-bold text-4xl">নেক্সট Lesson এ যান</h1>
+      </div>
+     `;
+    return;
+  }
+
   value.forEach((element) => {
     // console.log(element);
     //create a div where we will store json card value
@@ -34,10 +45,19 @@ const displayWords = (value) => {
     //set value to new child
     newDiv.innerHTML = `
      <div class="bg-white py-10 px-9 text-center space-y-2">
-      <h1 class="font-bold text-2xl"> ${element.word} </h1>
+ <h1 class="font-bold text-2xl">${element.word ? element.word : "কিছু পাইয়া যায়নি"}</h1>
       <p class="font-bangla"> Meaning /Pronounciation </p>
-      <P>${element.meaning} / ${element.pronunciation}  </P>
+      <P>${element.meaning ? element.meaning : "মিনিং পাওয়া যায়নি"} / ${element.pronunciation ? element.pronunciation : "প্রোনাউন্সিয়েসন পাওয়া যায়নি।"}  </P>
+        <div class="flex justify-between">
+        <button class="bg-base-200 rounded-full">
+          <i class="fa-solid fa-circle-info"></i>
+        </button>
+        <button class="bg-base-200 rounded-full">
+         <i class="fa-solid fa-volume-high"></i>
+        </button>
       </div>
+      </div>
+     
     `;
     // console.log(newDiv)
 
