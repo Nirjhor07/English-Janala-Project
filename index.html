@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -172,6 +172,19 @@
       ></div>
     </section>
 
+    <!-- search feature -->
+    <section class="flex justify-center m-7">
+      <div class="join">
+        <div>
+          <label class="input validator join-item">
+            <i class="fa-solid fa-magnifying-glass opacity-50"></i>
+            <input id="search-input-lvl" type="text" placeholder="search for words" required />
+          </label>
+        </div>
+        <button id="search-btn" class="btn btn-primary join-item">search</button>
+      </div>
+    </section>
+
     <!-- display words when clicked level or lesson btn -->
     <section
       id="word-display"
@@ -198,8 +211,6 @@
         </div>
       </div>
     </dialog>
-
-    
 
     <!-- All scripts -->
     <script src="scripts/level.js"></script>
