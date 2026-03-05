@@ -1,3 +1,10 @@
+//pronouce feature speaker
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
+
 // get the json level data
 const allLevelDAta = () => {
   const url = "https://openapi.programming-hero.com/api/levels/all";
@@ -106,7 +113,7 @@ const displayWords = (value) => {
         <button class="bg-base-200 rounded-full">
           <i onclick="loadModal('${element.id}')" class="fa-solid fa-circle-info"></i>
         </button>
-        <button class="bg-base-200 rounded-full">
+        <button onclick="pronounceWord('${element.word}')" class="bg-base-200 rounded-full">
          <i class="fa-solid fa-volume-high"></i>
         </button>
       </div>
@@ -155,8 +162,8 @@ const searchBtn = document
       .then((data) => {
         const allWords = data.data;
         const matchValue = allWords.filter((word) => {
-        //   console.log(word.word);
-            return word.word.toLowerCase().includes(inputValue.toLowerCase()); // word.word
+          //   console.log(word.word);
+          return word.word.toLowerCase().includes(inputValue.toLowerCase()); // word.word
         });
         displayWords(matchValue); // Display the filtered results
       });
